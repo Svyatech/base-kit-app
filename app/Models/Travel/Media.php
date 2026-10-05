@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  */
 class Media extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'disk',
         'path',

@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('personas', function (Blueprint $table) {
-            $table->id();
-            $table->string('slug')->unique();
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->id()->comment('ID');
+            $table->string('slug')->unique()->comment('Код персоны');
+            $table->string('name')->comment('Название персоны');
+            $table->string('description')->nullable()->comment('Описание персоны');
             $table->timestamps();
         });
     }

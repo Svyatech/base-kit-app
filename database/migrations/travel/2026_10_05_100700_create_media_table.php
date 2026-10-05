@@ -9,14 +9,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('mediable');
-            $table->string('disk')->default('public');
-            $table->string('path');
-            $table->string('alt')->nullable();
-            $table->string('caption')->nullable();
-            $table->unsignedInteger('sort_order')->default(0);
+            $table->id()->comment('ID');
+            $table->string('mediable_type')->comment('Класс модели-владельца');
+            $table->unsignedBigInteger('mediable_id')->comment('ID записи-владельца');
+            $table->string('disk')->default('public')->comment('Диск Laravel Storage');
+            $table->string('path')->comment('Путь к файлу на диске');
+            $table->string('alt')->nullable()->comment('Alt-текст изображения');
+            $table->string('caption')->nullable()->comment('Подпись к изображению');
+            $table->unsignedInteger('sort_order')->default(0)->comment('Порядок сортировки');
             $table->timestamps();
+
+            $table->index(['mediable_type', 'mediable_id']);
         });
     }
 

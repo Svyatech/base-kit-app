@@ -2,10 +2,12 @@
 
 namespace App\Models\Travel;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -20,12 +22,12 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property string|null $seo_title
  * @property string|null $seo_description
  * @property string $status
- * @property \Illuminate\Support\Carbon|null $fact_checked_at
- * @property \Illuminate\Support\Carbon|null $published_at
+ * @property Carbon|null $fact_checked_at
+ * @property Carbon|null $published_at
  * @property-read City|null $city
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Place> $places
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Persona> $personas
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Media> $media
+ * @property-read Collection<int, Place> $places
+ * @property-read Collection<int, Persona> $personas
+ * @property-read Collection<int, Media> $media
  */
 class Article extends Model
 {
@@ -37,6 +39,9 @@ class Article extends Model
     public const STATUS_DRAFT = 'draft';
     public const STATUS_PUBLISHED = 'published';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'city_id',
         'type',
@@ -53,6 +58,9 @@ class Article extends Model
         'published_at',
     ];
 
+    /**
+     * @return string[]
+     */
     protected function casts(): array
     {
         return [

@@ -68,10 +68,6 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - Модели тематики — `App\Models\Travel\` (City, Article, Place, Persona, Media). Справочник персон: `make seed-travel`.
 - Схема travel: cities → articles (city_id nullable = статья уровня страны), places, personas; pivots article_place (sort_order), article_persona; media — полиморфная (attachement к статьям и местам). У статей: markdown-контент, faq/sources jsonb, fact_checked_at.
 
-## Конвенции кода
-
-- Не писать комментарии в коде. Исключение — редкие места, где без пояснения не понять вообще.
-
 ## Прод-деплой
 
 Мерж в main → GitHub Actions (`.github/workflows/`): build → GHCR → SSH на VPS → `docker compose pull && up -d`. Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `APP_NAME`. На VPS сайт живёт в `/srv/sites/<APP_NAME>/` (там `.env` + `docker-compose.yml` из этого репо).

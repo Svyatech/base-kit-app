@@ -9,20 +9,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('city_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('type')->default('topic');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('excerpt')->nullable();
-            $table->longText('content')->nullable();
-            $table->jsonb('faq')->nullable();
-            $table->jsonb('sources')->nullable();
-            $table->string('seo_title')->nullable();
-            $table->string('seo_description')->nullable();
-            $table->string('status')->default('draft');
-            $table->date('fact_checked_at')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->id()->comment('ID');
+            $table->foreignId('city_id')->nullable()->comment('Город (NULL — статья уровня страны)')->constrained()->nullOnDelete();
+            $table->string('type')->default('topic')->comment('Тип: topic, comparison, persona_guide, country_topic');
+            $table->string('title')->comment('Заголовок статьи');
+            $table->string('slug')->unique()->comment('ЧПУ-идентификатор для URL');
+            $table->text('excerpt')->nullable()->comment('Короткое описание для карточек');
+            $table->longText('content')->nullable()->comment('Текст статьи (markdown)');
+            $table->jsonb('faq')->nullable()->comment('FAQ-блок для schema.org FAQPage');
+            $table->jsonb('sources')->nullable()->comment('Источники фактов (для редакции)');
+            $table->string('seo_title')->nullable()->comment('SEO title');
+            $table->string('seo_description')->nullable()->comment('SEO description');
+            $table->string('status')->default('draft')->comment('Статус: draft, published');
+            $table->date('fact_checked_at')->nullable()->comment('Дата проверки фактов');
+            $table->timestamp('published_at')->nullable()->comment('Дата публикации');
             $table->timestamps();
 
             $table->index(['city_id', 'status', 'type']);

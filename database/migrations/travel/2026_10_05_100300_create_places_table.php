@@ -9,17 +9,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('places', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
-            $table->string('type');
-            $table->string('name');
-            $table->string('slug');
-            $table->text('description')->nullable();
-            $table->string('address')->nullable();
-            $table->string('google_maps_url')->nullable();
-            $table->string('price_note')->nullable();
-            $table->string('working_hours')->nullable();
-            $table->date('fact_checked_at')->nullable();
+            $table->id()->comment('ID');
+            $table->foreignId('city_id')->comment('Город')->constrained()->cascadeOnDelete();
+            $table->string('type')->comment('Тип: beach, market, attraction, food, coworking');
+            $table->string('name')->comment('Название места');
+            $table->string('slug')->comment('ЧПУ (уникален в пределах города)');
+            $table->text('description')->nullable()->comment('Описание');
+            $table->string('address')->nullable()->comment('Адрес');
+            $table->string('google_maps_url')->nullable()->comment('Ссылка на Google Maps');
+            $table->string('price_note')->nullable()->comment('Цены текстом: "вход 30к донг, лежак 50к"');
+            $table->string('working_hours')->nullable()->comment('Часы работы');
+            $table->date('fact_checked_at')->nullable()->comment('Дата проверки фактов');
             $table->timestamps();
 
             $table->unique(['city_id', 'slug']);

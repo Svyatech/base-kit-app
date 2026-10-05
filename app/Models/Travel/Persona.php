@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Persona extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'slug',
         'name',

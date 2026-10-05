@@ -9,17 +9,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('name_local')->nullable();
-            $table->string('slug')->unique();
-            $table->text('excerpt')->nullable();
-            $table->longText('content')->nullable();
-            $table->string('seo_title')->nullable();
-            $table->string('seo_description')->nullable();
-            $table->boolean('is_published')->default(false);
-            $table->timestamp('published_at')->nullable();
-            $table->unsignedInteger('sort_order')->default(0);
+            $table->id()->comment('ID');
+            $table->string('name')->comment('Название города');
+            $table->string('name_local')->nullable()->comment('Название на языке страны');
+            $table->string('slug')->unique()->comment('ЧПУ-идентификатор для URL');
+            $table->text('excerpt')->nullable()->comment('Короткое "кому подходит" для карточек');
+            $table->longText('content')->nullable()->comment('Обзор города (markdown)');
+            $table->string('seo_title')->nullable()->comment('SEO title');
+            $table->string('seo_description')->nullable()->comment('SEO description');
+            $table->boolean('is_published')->default(false)->comment('Опубликован ли город');
+            $table->timestamp('published_at')->nullable()->comment('Дата публикации');
+            $table->unsignedInteger('sort_order')->default(0)->comment('Порядок в навигации');
             $table->timestamps();
         });
     }

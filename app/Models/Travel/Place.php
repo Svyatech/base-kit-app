@@ -25,6 +25,9 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Place extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'city_id',
         'type',
@@ -38,6 +41,9 @@ class Place extends Model
         'fact_checked_at',
     ];
 
+    /**
+     * @return string[]
+     */
     protected function casts(): array
     {
         return [

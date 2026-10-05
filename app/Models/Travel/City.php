@@ -2,8 +2,10 @@
 
 namespace App\Models\Travel;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -15,13 +17,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $seo_title
  * @property string|null $seo_description
  * @property bool $is_published
- * @property \Illuminate\Support\Carbon|null $published_at
+ * @property Carbon|null $published_at
  * @property int $sort_order
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Article> $articles
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Place> $places
+ * @property-read Collection<int, Article> $articles
+ * @property-read Collection<int, Place> $places
  */
 class City extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'name_local',

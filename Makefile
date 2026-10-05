@@ -70,6 +70,9 @@ migrate-travel: ## Только travel-тематику
 seed-travel: ## Справочник персон туристов
 	docker exec $(APP_NAME)-app php artisan db:seed --class=TravelPersonaSeeder --force
 
+test: ## Прогнать тесты
+	docker exec $(APP_NAME)-app php artisan test
+
 shell: ## Shell внутри контейнера сайта
 	docker exec -it $(APP_NAME)-app sh
 
@@ -101,4 +104,4 @@ db-dump: ## Дамп базы в файл: make db-dump DB=basekit
 help: ## Показать эту справку
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: infra-init infra-up infra-down infra-logs build-base build rebuild up up-recreate dev down restart ps migrate migrate-core migrate-travel seed-travel shell tinker cache-clear key logs db-create db-shell db-dump help
+.PHONY: infra-init infra-up infra-down infra-logs build-base build rebuild up up-recreate dev down restart ps migrate migrate-core migrate-travel seed-travel test shell tinker cache-clear key logs db-create db-shell db-dump help
