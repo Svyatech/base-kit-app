@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id()->comment('ID');
             $table->foreignId('city_id')->nullable()->comment('Город (NULL — статья уровня страны)')->constrained()->nullOnDelete();
+            $table->foreignId('place_id')->nullable()->comment('Место, гайдом по которому является статья')->constrained()->nullOnDelete();
             $table->string('type')->default('topic')->comment('Тип: topic, comparison, persona_guide, country_topic');
             $table->string('title')->comment('Заголовок статьи');
             $table->string('slug')->unique()->comment('ЧПУ-идентификатор для URL');

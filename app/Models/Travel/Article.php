@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int|null $city_id
+ * @property int|null $place_id
  * @property string $type
  * @property string $title
  * @property string $slug
@@ -25,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $fact_checked_at
  * @property Carbon|null $published_at
  * @property-read City|null $city
+ * @property-read Place|null $place
  * @property-read Collection<int, Place> $places
  * @property-read Collection<int, Persona> $personas
  * @property-read Collection<int, Media> $media
@@ -44,6 +46,7 @@ class Article extends Model
      */
     protected $fillable = [
         'city_id',
+        'place_id',
         'type',
         'title',
         'slug',
@@ -77,6 +80,14 @@ class Article extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * @return BelongsTo<Place, $this>
+     */
+    public function place(): BelongsTo
+    {
+        return $this->belongsTo(Place::class);
     }
 
     /**
