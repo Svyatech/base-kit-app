@@ -32,6 +32,9 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Place extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'city_id',
         'parent_id',

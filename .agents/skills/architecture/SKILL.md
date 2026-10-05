@@ -68,6 +68,12 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - Модели тематики — `App\Models\Travel\` (City, Article, Place, Persona, Media). Справочник персон: `make seed-travel`.
 - Схема travel: cities → articles (city_id nullable = статья уровня страны), places, personas; pivots article_place (sort_order), article_persona; media — полиморфная (attachement к статьям и местам). У статей: markdown-контент, faq/sources jsonb, fact_checked_at.
 
+## Админка (Filament 5)
+
+- Filament, панель `admin` по пути `/admin` (`app/Providers/Filament/AdminPanelProvider.php`), свои роуты вне locale-группы.
+- **Авторизация встроенная**: `->login()` + middleware `Authenticate` — гостей редиректит на `/admin/login`. Публичной регистрации нет, пользователи создаются только через artisan/tinker, поэтому `User::canAccessPanel()` возвращает true (любой существующий пользователь = админ). Модель `User` implements `FilamentUser`.
+- Ресурсы сущностей: `app/Filament/Resources/` (discoverResources настроен).
+
 ## Cookie-согласие
 
 - Обязательно: на сайте аналитика (Яндекс.Метрика) и позже реклама (РСЯ) — это необязательные куки = требуется согласие (GDPR/ePrivacy для аудитории ЕС, практика РКН по 152-ФЗ).

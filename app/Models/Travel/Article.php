@@ -33,12 +33,34 @@ use Illuminate\Support\Carbon;
  */
 class Article extends Model
 {
+    /**
+     * @var string
+     */
     public const TYPE_TOPIC = 'topic';
+
+    /**
+     * @var string
+     */
     public const TYPE_COMPARISON = 'comparison';
+
+    /**
+     * @var string
+     */
     public const TYPE_PERSONA_GUIDE = 'persona_guide';
+
+    /**
+     * @var string
+     */
     public const TYPE_COUNTRY_TOPIC = 'country_topic';
 
+    /**
+     * @var string
+     */
     public const STATUS_DRAFT = 'draft';
+
+    /**
+     * @var string
+     */
     public const STATUS_PUBLISHED = 'published';
 
     /**
