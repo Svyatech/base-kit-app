@@ -60,6 +60,10 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - В `Caddyfile.app` — `auto_https off` (TLS терминирует внешний Caddy инфры).
 - Новый composer-пакет: `make rebuild`, затем `docker cp <APP_NAME>-app:/var/www/html/vendor ./vendor` (маунт перекрывает vendor образа).
 
+## Конвенции кода
+
+- Не писать комментарии в коде. Исключение — редкие места, где без пояснения не понять вообще.
+
 ## Прод-деплой
 
 Мерж в main → GitHub Actions (`.github/workflows/`): build → GHCR → SSH на VPS → `docker compose pull && up -d`. Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `APP_NAME`. На VPS сайт живёт в `/srv/sites/<APP_NAME>/` (там `.env` + `docker-compose.yml` из этого репо).
