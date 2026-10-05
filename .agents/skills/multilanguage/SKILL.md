@@ -1,0 +1,56 @@
+---
+name: multilanguage
+description: Мультиязычность base-kit — хранение переводов (jsonb + spatie), URL-стратегия /ru//en/, определение языка, hreflang, переключатель. Читать при работе с локалями, переводами контента, роутингом локалей.
+---
+
+# Мультиязычность (выжимка решений, дополняется по ходу внедрения)
+
+Локали: `ru` (основная, x-default), `en`. Языки добавляются без миграций (jsonb).
+
+## Хранение переводов контента
+
+- **jsonb-колонки + spatie/laravel-translatable.** Поля `title, slug, excerpt,
+  content, seo_title, seo_description` у cities/places/articles — jsonb
+  вида `{"ru": "...", "en": "..."}`. Чтение: `$model->getTranslation('title', $locale)`,
+  фолбэк на `ru`.
+- UI-строки (меню, кнопки) — штатно: `lang/ru.json`, `lang/en.json`, `{{ __('...') }}`.
+- Slug переводим — URL на языке страницы (`/en/nha-trang-markets/`).
+
+## URL-стратегия (SEO)
+
+- Префиксы у обеих локалей, единообразно: `/ru/...`, `/en/...`. Не поддомены
+  (размывают вес домена).
+- Каждая языковая версия = стабильный URL, краулится независимо.
+- **hreflang-кластер** на каждой странице: ru + en + `x-default` → ru.
+  Плюс sitemap с языковыми связками.
+
+## Определение языка
+
+- **Поисковик показывает версию по языку запроса, не по гео.** Русский запрос
+  из Вьетнама → русская страница. Работает само + hreflang.
+- **IP-редиректы ЗАПРЕЩЕНЫ** (Googlebot с US-IP не увидит ru-версию).
+- Корень `/` — единственное место с авто-выбором, 302-редирект:
+  кука выбора языка → Accept-Language (`ru*` → /ru/, иначе /en/) → дефолт `ru`.
+  IP не используется нигде.
+- Переключатель (🌐 в шапке) — ссылка `<a href>` на ТУ ЖЕ страницу другой
+  локали (не на главную), ставит куку. Ссылки, не JS — по ним ходят боты.
+
+## Техническая схема
+
+- Роутинг: `Route::prefix('{locale}')` + middleware — локаль из URL,
+  валидация `ru|en`, 404 на неизвестную локаль.
+- `route()` в шаблонах всегда с текущей локалью (хелпер/дефолт параметра).
+- Перевод контента: агент + ручная вычитка (машинный перевод без вычитки
+  в прод не идёт — риск auto-content).
+
+## Статус внедрения
+
+- [x] Решения приняты (этот документ)
+- [x] Схема: поля контента → jsonb (свёртка миграций + fresh). Переводимые поля — jsonb `{"ru": ...}`: у cities — name, slug, excerpt, content, seo_* (name_local — НЕ перевод, строка); у places — name, slug, description, price_note, working_hours (address — не перевод); у articles — title, slug, excerpt, content, seo_* (faq — по локалям, sources — не перевод); у personas — name, description. Касты 'array' в моделях.
+- [ ] spatie/laravel-translatable (packagist флапает; после установки — HasTranslations + $translatable в моделях)
+- [x] Роутинг: `Route::prefix('{locale}')` + middleware `SetLocale` (локаль из URL, 404 на не ru/en, `URL::defaults`), корень `/` — `LocaleRedirectController`: кука locale → Accept-Language → дефолт ru, 302. Нюанс: без заголовка Accept-Language Symfony дефолтит en — проверяем наличие заголовка явно (боты → ru).
+- [x] Переключатель языка в шапке (компонент lang-switcher: глобус + код локали, ссылка на ту же страницу, кука locale через JS — кука в encryptCookies except)
+- [x] hreflang-паршл в layout (ru/en/x-default из текущего роута); sitemap — когда будут страницы
+- [x] lang-файлы UI-строк: `lang/{ru,en}/home.php`, `ui.php` (ключи, не JSON-строки); главная и cookie-баннер переведены
+
+Cookie-баннер — НЕ здесь, задокументирован в скилле architecture.

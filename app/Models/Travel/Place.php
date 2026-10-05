@@ -2,35 +2,33 @@
 
 namespace App\Models\Travel;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $city_id
  * @property int|null $parent_id
  * @property string $type
- * @property string $name
- * @property string $slug
- * @property string|null $description
+ * @property array $name
+ * @property array $slug
+ * @property array|null $description
  * @property string|null $address
  * @property string|null $google_maps_url
- * @property string|null $price_note
- * @property string|null $working_hours
+ * @property array|null $price_note
+ * @property array|null $working_hours
  * @property int $sort_order
- * @property Carbon|null $fact_checked_at
+ * @property \Illuminate\Support\Carbon|null $fact_checked_at
  * @property-read City $city
  * @property-read Place|null $parent
- * @property-read Collection<int, Place> $children
- * @property-read Collection<int, Article> $articles
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Place> $children
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Article> $articles
  * @property-read Article|null $guideArticle
- * @property-read Collection<int, Media> $media
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Media> $media
  */
 class Place extends Model
 {
@@ -49,9 +47,17 @@ class Place extends Model
         'fact_checked_at',
     ];
 
+    /**
+     * @return string[]
+     */
     protected function casts(): array
     {
         return [
+            'name' => 'array',
+            'slug' => 'array',
+            'description' => 'array',
+            'price_note' => 'array',
+            'working_hours' => 'array',
             'fact_checked_at' => 'date',
         ];
     }

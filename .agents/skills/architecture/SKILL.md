@@ -68,6 +68,14 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - Модели тематики — `App\Models\Travel\` (City, Article, Place, Persona, Media). Справочник персон: `make seed-travel`.
 - Схема travel: cities → articles (city_id nullable = статья уровня страны), places, personas; pivots article_place (sort_order), article_persona; media — полиморфная (attachement к статьям и местам). У статей: markdown-контент, faq/sources jsonb, fact_checked_at.
 
+## Cookie-согласие
+
+- Обязательно: на сайте аналитика (Яндекс.Метрика) и позже реклама (РСЯ) — это необязательные куки = требуется согласие (GDPR/ePrivacy для аудитории ЕС, практика РКН по 152-ФЗ).
+- Реализация: компонент `resources/views/components/cookie-banner.blade.php` — плашка снизу, кнопка "Понятно" ставит `cookie_consent=1` на год (JS, SameSite=Lax), серверно не рендерится при наличии куки (без миганий).
+- **Кука ставится JS'ом → обязательно в исключениях шифрования** (`bootstrap/app.php`: `encryptCookies(except: ['cookie_consent'])`), иначе Laravel зануляет её при чтении.
+- Аналитика и рекламные скрипты подключаются ТОЛЬКО при наличии `cookie_consent`.
+- Страница `/privacy` (PrivacyController) — текст политики; при появлении мультиязычности переедет под локали.
+
 ## Прод-деплой
 
 Мерж в main → GitHub Actions (`.github/workflows/`): build → GHCR → SSH на VPS → `docker compose pull && up -d`. Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `APP_NAME`. На VPS сайт живёт в `/srv/sites/<APP_NAME>/` (там `.env` + `docker-compose.yml` из этого репо).

@@ -11,6 +11,8 @@ Postgres 17. Ядро Laravel (users, cache, jobs, sessions) — `database/migra
 ## Конвенции
 
 - Каждому полю — `->comment('кратко по-русски')` (COMMENT ON COLUMN, видно в psql/IDE).
+- **Мультиязычность: переводимые поля — jsonb** `{"ru": "...", "en": "..."}`, каст 'array' в модели. Переводимые: у cities — name, slug, excerpt, content, seo_*; у places — name, slug, description, price_note, working_hours; у articles — title, slug, excerpt, content, faq (по локалям), seo_*; у personas — name, description. НЕ переводятся (строки): name_local, address, sources, все служебные поля. Подробности — скилл multilanguage.
+- upsert/insert билдером НЕ применяет касты — jsonb-поля кодировать `json_encode(..., JSON_UNESCAPED_UNICODE)` вручную (см. TravelPersonaSeeder).
 - Миграции тематики — только в подпапку; запуск `migrate --path=database/migrations/<theme>`; откат тоже с `--path`.
 - Порядок файлов = порядок FK (справочники и родители раньше зависимых).
 - Модели — чистые: `$fillable`, касты, связи, PHPDoc `@property`/`@return` с дженериками, без логики.

@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id()->comment('ID');
             $table->string('slug')->unique()->comment('Код персоны');
-            $table->string('name')->comment('Название персоны');
-            $table->string('description')->nullable()->comment('Описание персоны');
+            $table->jsonb('name')->comment('Название персоны (переводы: ru, en)');
+            $table->jsonb('description')->nullable()->comment('Описание персоны (переводы)');
             $table->timestamps();
         });
     }

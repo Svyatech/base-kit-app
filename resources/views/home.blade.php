@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', config('app.name') . ' — движок контентных сайтов')
+@section('title', config('app.name') . ' — ' . __('home.meta_title'))
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
@@ -8,32 +8,32 @@
 
 @section('content')
     <div class="hero">
-        <h1>Движок запущен.<br>Осталось наполнить его <span>смыслом</span>.</h1>
-        <p>Базовый каркас контентного сайта: серверный рендеринг на Blade, без лишних слоёв. Клонируй, наполняй, публикуй.</p>
+        <h1>{{ __('home.hero_line1') }}<br>{{ __('home.hero_line2') }} <span>{{ __('home.hero_accent') }}</span>.</h1>
+        <p>{{ __('home.hero_text') }}</p>
     </div>
 
     <div class="stack">
         <div class="stack-card">
             <div class="name">Laravel 13</div>
-            <div class="role">фреймворк</div>
+            <div class="role">{{ __('home.stack_framework') }}</div>
         </div>
         <div class="stack-card">
             <div class="name">PHP 8.5</div>
-            <div class="role">FrankenPHP, один контейнер</div>
+            <div class="role">{{ __('home.stack_php') }}</div>
         </div>
         <div class="stack-card">
             <div class="name">PostgreSQL 17</div>
-            <div class="role">данные, jsonb</div>
+            <div class="role">{{ __('home.stack_db') }}</div>
         </div>
         <div class="stack-card">
             <div class="name">Redis 7</div>
-            <div class="role">кэш, сессии, очереди</div>
+            <div class="role">{{ __('home.stack_redis') }}</div>
         </div>
     </div>
 
     <div class="commands">
-        <div><span class="cmd">make dev</span> <span class="hint"># разработка, правки видны по F5</span></div>
-        <div><span class="cmd">make migrate</span> <span class="hint"># ядро + тематика</span></div>
-        <div><span class="cmd">make test</span> <span class="hint"># тесты</span></div>
+        <div><span class="cmd">make dev</span> <span class="hint"># {{ __('home.cmd_dev') }}</span></div>
+        <div><span class="cmd">make migrate</span> <span class="hint"># {{ __('home.cmd_migrate') }}</span></div>
+        <div><span class="cmd">make test</span> <span class="hint"># {{ __('home.cmd_test') }}</span></div>
     </div>
 @endsection

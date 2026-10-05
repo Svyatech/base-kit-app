@@ -8,20 +8,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @property int $id
  * @property string $slug
- * @property string $name
- * @property string|null $description
+ * @property array $name
+ * @property array|null $description
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Article> $articles
  */
 class Persona extends Model
 {
-    /**
-     * @var string[]
-     */
     protected $fillable = [
         'slug',
         'name',
         'description',
     ];
+
+    /**
+     * @return string[]
+     */
+    protected function casts(): array
+    {
+        return [
+            'name' => 'array',
+            'description' => 'array',
+        ];
+    }
 
     /**
      * @return BelongsToMany<Article, $this>

@@ -14,14 +14,14 @@ use Illuminate\Support\Carbon;
  * @property int|null $city_id
  * @property int|null $place_id
  * @property string $type
- * @property string $title
- * @property string $slug
- * @property string|null $excerpt
- * @property string|null $content
+ * @property array $title
+ * @property array $slug
+ * @property array|null $excerpt
+ * @property array|null $content
  * @property array|null $faq
  * @property array|null $sources
- * @property string|null $seo_title
- * @property string|null $seo_description
+ * @property array|null $seo_title
+ * @property array|null $seo_description
  * @property string $status
  * @property Carbon|null $fact_checked_at
  * @property Carbon|null $published_at
@@ -67,8 +67,14 @@ class Article extends Model
     protected function casts(): array
     {
         return [
+            'title' => 'array',
+            'slug' => 'array',
+            'excerpt' => 'array',
+            'content' => 'array',
             'faq' => 'array',
             'sources' => 'array',
+            'seo_title' => 'array',
+            'seo_description' => 'array',
             'fact_checked_at' => 'date',
             'published_at' => 'datetime',
         ];

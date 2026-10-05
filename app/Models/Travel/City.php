@@ -2,31 +2,26 @@
 
 namespace App\Models\Travel;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property string $name
+ * @property array $name
  * @property string|null $name_local
- * @property string $slug
- * @property string|null $excerpt
- * @property string|null $content
- * @property string|null $seo_title
- * @property string|null $seo_description
+ * @property array $slug
+ * @property array|null $excerpt
+ * @property array|null $content
+ * @property array|null $seo_title
+ * @property array|null $seo_description
  * @property bool $is_published
- * @property Carbon|null $published_at
+ * @property \Illuminate\Support\Carbon|null $published_at
  * @property int $sort_order
- * @property-read Collection<int, Article> $articles
- * @property-read Collection<int, Place> $places
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Article> $articles
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Place> $places
  */
 class City extends Model
 {
-    /**
-     * @var string[]
-     */
     protected $fillable = [
         'name',
         'name_local',
@@ -40,9 +35,18 @@ class City extends Model
         'sort_order',
     ];
 
+    /**
+     * @return string[]
+     */
     protected function casts(): array
     {
         return [
+            'name' => 'array',
+            'slug' => 'array',
+            'excerpt' => 'array',
+            'content' => 'array',
+            'seo_title' => 'array',
+            'seo_description' => 'array',
             'is_published' => 'boolean',
             'published_at' => 'datetime',
         ];
