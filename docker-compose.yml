@@ -1,0 +1,12 @@
+services:
+  app:
+    image: ${APP_IMAGE:-base-kit-app}
+    container_name: ${APP_NAME:-base-kit}-app
+    restart: always
+    env_file: .env
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

@@ -1,0 +1,14 @@
+# Не тащим в образ лишнее
+.git
+.github
+node_modules
+vendor
+storage/logs
+tests
+.dockerignore
+Dockerfile
+docker-compose.yml
+server
+*.md
+.env
+.env.*
