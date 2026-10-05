@@ -15,7 +15,7 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - **Postgres 17** — один процесс на все сайты; у каждого сайта СВОЯ база (`CREATE DATABASE`). Отдельных БД-контейнеров на сайт не создавать.
 - **Redis 7** — один на все сайты (кэш, сессии, очереди).
 
-Первый раз на машине: `make infra-init && make infra-up` (команды сайта дергают `../infra/docker-compose.yml`). Креды: юзер `basekit` (суперюзер), пароль `secret` — задаются в `infra/.env`.
+Первый раз на машине: `make infra-init && make infra-up` (команды сайта дергают `../infra/docker-compose.yml`). Креды: юзер `basekit` (суперюзер), пароль `basekit` (дев; задаются в `infra/.env`). Смена пароля в живом Postgres — только `ALTER ROLE`, рестарт инфры пароль НЕ меняет (env применяется при первой инициализации тома).
 
 ## Стек и ключевые решения
 
@@ -59,6 +59,14 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - Правки `.env` требуют `docker compose up -d --force-recreate` (env_file запекается при создании контейнера).
 - В `Caddyfile.app` — `auto_https off` (TLS терминирует внешний Caddy инфры).
 - Новый composer-пакет: `make rebuild`, затем `docker cp <APP_NAME>-app:/var/www/html/vendor ./vendor` (маунт перекрывает vendor образа).
+
+## Миграции по тематикам
+
+- Ядро (users, cache, jobs) — `database/migrations/`, бежит всегда.
+- Тематика — подпапка (`database/migrations/travel/`): дефолтный `migrate` в подпапки НЕ заглядывает, подключается только явно: `php artisan migrate --path=database/migrations/travel`. Откатывать тоже с `--path` (батчи общие).
+- `make migrate` = ядро + travel; `migrate-core` / `migrate-travel` — раздельно.
+- Модели тематики — `App\Models\Travel\` (City, Article, Place, Persona, Media). Справочник персон: `make seed-travel`.
+- Схема travel: cities → articles (city_id nullable = статья уровня страны), places, personas; pivots article_place (sort_order), article_persona; media — полиморфная (attachement к статьям и местам). У статей: markdown-контент, faq/sources jsonb, fact_checked_at.
 
 ## Конвенции кода
 
