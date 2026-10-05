@@ -1,0 +1,53 @@
+.hero { max-width: 640px; }
+
+.hero h1 {
+    font-size: 42px;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero p {
+    color: var(--muted);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.stack-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.stack-card .name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.stack-card .role {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.commands {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.commands .cmd { color: var(--accent); }
+.commands .hint { color: var(--muted); }
