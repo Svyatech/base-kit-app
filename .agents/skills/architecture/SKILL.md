@@ -58,7 +58,7 @@ description: Архитектура сайта на base-kit — Laravel + Frank
 - OPcache в PHP 8.5 встроен в ядро — не ставить через docker-php-ext-install.
 - Правки `.env` требуют `docker compose up -d --force-recreate` (env_file запекается при создании контейнера).
 - В `Caddyfile.app` — `auto_https off` (TLS терминирует внешний Caddy инфры).
-- Новый composer-пакет: `make rebuild`, затем `docker cp <APP_NAME>-app:/var/www/html/vendor ./vendor` (маунт перекрывает vendor образа).
+- Дев-маунт перекрывает `vendor` образа: `make dev` сам ставит зависимости, если `vendor` нет или `composer.lock` новее (composer install с dev-пакетами в контейнере base-kit-php). Ручной таргет — `make vendor`. Новый composer-пакет: `make rebuild`, затем `make dev`.
 
 ## Миграции по тематикам
 

@@ -44,7 +44,11 @@ up-recreate: ## Перезапустить сайт с новым образом
 	$(COMPOSE) up -d --force-recreate
 
 dev: ## Поднять сайт в дев-режиме (код смонтирован, правки видны по F5)
+	@if [ ! -f vendor/autoload.php ] || [ composer.lock -nt vendor/autoload.php ]; then $(MAKE) vendor; fi
 	$(COMPOSE_DEV) up -d
+
+vendor: ## Установить/обновить vendor с dev-зависимостями (нужен дев-режиму, маунт перекрывает vendor образа)
+	docker run --rm -v "$$PWD":/var/www/html -w /var/www/html $(BASE_IMAGE) composer install --prefer-dist --no-interaction
 
 down: ## Остановить сайт
 	$(COMPOSE) down
@@ -104,4 +108,4 @@ db-dump: ## Дамп базы в файл: make db-dump DB=basekit
 help: ## Показать эту справку
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: infra-init infra-up infra-down infra-logs build-base build rebuild up up-recreate dev down restart ps migrate migrate-core migrate-travel seed-travel test shell tinker cache-clear key logs db-create db-shell db-dump help
+.PHONY: infra-init infra-up infra-down infra-logs build-base build rebuild up up-recreate dev vendor down restart ps migrate migrate-core migrate-travel seed-travel test shell tinker cache-clear key logs db-create db-shell db-dump help
