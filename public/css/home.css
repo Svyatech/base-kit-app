@@ -1,53 +1,222 @@
-.hero { max-width: 640px; }
+/* Главная страница */
 
-.hero h1 {
-    font-size: 42px;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    margin-bottom: 16px;
+.hero {
+    background: linear-gradient(150deg, var(--sea-soft) 0%, var(--bg) 75%);
+    padding: 56px 0 64px;
+    margin-top: -40px;
 }
 
-.hero h1 span { color: var(--accent); }
+.hero-kicker {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
 
-.hero p {
+.hero-title {
+    font-size: 34px;
+    font-weight: 800;
+    max-width: 640px;
+}
+
+.hero-text {
+    margin-top: 16px;
+    font-size: 17px;
     color: var(--muted);
-    font-size: 18px;
-    margin-bottom: 40px;
+    max-width: 560px;
 }
 
-.stack {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 40px;
+.hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
 }
 
-.stack-card {
+.hero-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
-}
-
-.stack-card .name {
+    color: var(--text);
     font-weight: 600;
-    margin-bottom: 4px;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: border-color 0.15s, color 0.15s;
 }
 
-.stack-card .role {
-    color: var(--muted);
-    font-size: 14px;
+.hero-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
-.commands {
+.hero-link-honest {
+    border-color: var(--coral);
+    color: var(--coral);
+    font-weight: 700;
+}
+
+.hero-link-honest:hover {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: #fff;
+}
+
+/* Конвертер донга (сайдбар-виджет) */
+
+.home-layout {
+    display: grid;
+    gap: 32px;
+}
+
+.converter {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 14px;
-    line-height: 2;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 16px;
 }
 
-.commands .cmd { color: var(--accent); }
-.commands .hint { color: var(--muted); }
+.converter-head { margin-bottom: 14px; }
+
+.converter-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.converter-rate {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.converter-fields {
+    display: grid;
+    gap: 10px;
+}
+
+.converter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.converter-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.converter-field input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font);
+}
+
+.converter-field input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+}
+
+.converter-field--main input { border-color: var(--accent); }
+
+.converter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.converter-chips button {
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.converter-chips button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.converter-hint {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.converter-hint b { color: var(--text); }
+
+@media (min-width: 960px) {
+    .home-layout { grid-template-columns: 1fr 300px; align-items: start; }
+
+    .home-aside {
+        position: sticky;
+        top: 84px;
+        margin-top: 64px;
+    }
+}
+
+/* Персоны */
+
+.persona-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+}
+
+.persona-card {
+    display: block;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s;
+}
+
+.persona-card:hover { border-color: var(--accent); }
+
+.persona-name {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.persona-text {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+@media (min-width: 640px) {
+    .persona-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+    .persona-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .hero { padding: 72px 0 80px; }
+    .hero-title { font-size: 44px; }
+}

@@ -1,0 +1,253 @@
+/* Детальная статья */
+
+.article-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Оглавление */
+
+.toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+}
+
+.toc-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.toc-list {
+    list-style: none;
+    counter-reset: toc;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.toc-list li { counter-increment: toc; }
+
+.toc-list a {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    min-height: 32px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.toc-list a::before {
+    content: counter(toc);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.toc-list a:hover { color: var(--accent); }
+
+/* Текст статьи */
+
+.article { min-width: 0; }
+
+.article section { margin-top: 36px; }
+
+.article-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.article-head .wishlist-btn { margin-top: 2px; }
+
+.article-title {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.article-lead {
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 18px 22px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.article h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.article p { margin-bottom: 14px; }
+
+.article ul {
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Таблицы */
+
+.table-wrap { overflow-x: auto; }
+
+.article table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.article th,
+.article td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.article th {
+    background: var(--surface-2);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+}
+
+.article tr:last-child td { border-bottom: 0; }
+
+/* Карточки мест внутри статьи */
+
+.place-cards {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    margin: 16px 0;
+}
+
+.place-card {
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.place-card-name { font-weight: 700; }
+
+.place-card-meta {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.place-card-map {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Подводные камни */
+
+.pitfalls {
+    background: var(--coral-soft);
+    border: 1px solid color-mix(in srgb, var(--coral) 35%, transparent);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+}
+
+.pitfalls h2 { color: var(--coral); }
+
+/* FAQ */
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+}
+
+.faq-item summary {
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+}
+
+.faq-item p {
+    margin-top: 10px;
+    color: var(--muted);
+}
+
+/* Партнёрский блок */
+
+.partner-block {
+    margin-top: 40px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.partner-title {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.partner-text {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 8px 0 16px;
+}
+
+.article .ad-slot { margin-top: 32px; }
+
+@media (min-width: 640px) {
+    .place-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+    .article-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .toc {
+        position: sticky;
+        top: 84px;
+        width: 240px;
+        flex-shrink: 0;
+    }
+
+    .article-title { font-size: 38px; }
+}

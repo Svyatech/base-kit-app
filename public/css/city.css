@@ -1,0 +1,331 @@
+/* Хаб города */
+
+.city-hero {
+    margin-top: -40px;
+    padding: 40px 0 48px;
+    color: #fff;
+}
+
+.city-hero .breadcrumbs,
+.city-hero .breadcrumbs a {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.city-hero .breadcrumbs li:not(:last-child)::after {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.city-title {
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.city-tagline {
+    margin-top: 10px;
+    font-size: 17px;
+    max-width: 560px;
+    opacity: 0.9;
+}
+
+.city-facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.city-fact {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+}
+
+.city-fact-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+}
+
+.city-fact-value {
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+/* Кому сюда */
+
+.verdict-list {
+    display: grid;
+    gap: 12px;
+}
+
+.verdict {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.verdict-text {
+    font-size: 15px;
+    color: var(--muted);
+}
+
+/* Когда ехать (календарь сезонности) */
+
+.season {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+}
+
+.season-months {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.season-month {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.season-month.season-good { background: #d7ecd9; color: #1e5e28; }
+.season-month.season-mid { background: #f3e9c8; color: #7a611c; }
+.season-month.season-bad { background: #f2d5d0; color: #8e2f22; }
+
+[data-theme="dark"] .season-month.season-good { background: #1e3a24; color: #8fd09a; }
+[data-theme="dark"] .season-month.season-mid { background: #3a3219; color: #d8bf6a; }
+[data-theme="dark"] .season-month.season-bad { background: #3a201c; color: #e08a7a; }
+
+.season-jelly {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.season-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.season-legend i {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: -1px;
+}
+
+.season-legend .season-good { background: #69b473; }
+.season-legend .season-mid { background: #d8bf6a; }
+.season-legend .season-bad { background: #d96a57; }
+
+.season-note {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* Бюджет недели */
+
+.table-wrap { overflow-x: auto; }
+
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.budget-table th,
+.budget-table td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.budget-table th {
+    background: var(--surface-2);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+}
+
+.budget-table tr:last-child td { border-bottom: 0; }
+
+.budget-total td {
+    font-weight: 800;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+}
+
+.budget-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+@media (min-width: 960px) {
+    .season-months { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* Карта города */
+
+.map-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.map-chip {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.map-chip:hover { border-color: var(--accent); }
+
+.map-chip.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.map-chip--zones {
+    border-style: dashed;
+    color: var(--accent);
+}
+
+.map-chip--zones.is-active {
+    border-style: solid;
+}
+
+.city-map {
+    position: relative;
+    z-index: 1;
+    height: 340px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.map-popup-meta {
+    font-size: 13px;
+    color: #666;
+}
+
+.map-popup-img {
+    display: block;
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+}
+
+.map-popup-rating {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #b8860b;
+}
+
+.map-ym-cta {
+    display: block;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--accent);
+    border-radius: var(--radius-sm);
+    color: #fff !important;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.map-ym-cta:hover { opacity: 0.9; }
+
+[data-theme="dark"] .map-popup-meta { color: var(--muted); }
+
+/* Места */
+
+.place-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.place-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+}
+
+.place-row:hover { box-shadow: var(--shadow-hover); }
+
+.place-thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.place-name {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.place-meta {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+@media (min-width: 640px) {
+    .city-facts { grid-template-columns: repeat(4, 1fr); }
+    .verdict-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+    .city-hero { padding: 56px 0 64px; }
+    .city-title { font-size: 52px; }
+    .city-map { height: 440px; }
+}

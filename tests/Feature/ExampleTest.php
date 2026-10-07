@@ -35,7 +35,18 @@ class ExampleTest extends TestCase
      */
     public function test_home_page_responds_in_both_locales(): void
     {
-        $this->get('/ru')->assertOk()->assertSee('Движок запущен');
-        $this->get('/en')->assertOk()->assertSee('Engine is running');
+        $this->get('/ru')->assertOk()->assertSee('Путеводитель');
+        $this->get('/en')->assertOk()->assertSee('Travel guide');
+    }
+
+    /**
+     * @return void
+     */
+    public function test_preview_pages_respond(): void
+    {
+        $this->get('/ru/preview/city')->assertOk()->assertSee('Нячанг');
+        $this->get('/ru/preview/article')->assertOk()->assertSee('Рынки Нячанга');
+        $this->get('/ru/preview/arrival')->assertOk()->assertSee('Советы по прилёту');
+        $this->get('/ru/preview/my')->assertOk()->assertSee('Моё');
     }
 }
