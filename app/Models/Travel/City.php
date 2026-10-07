@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property bool $is_published
  * @property \Illuminate\Support\Carbon|null $published_at
  * @property int $sort_order
+ * @property float|null $map_lat
+ * @property float|null $map_lng
+ * @property int|null $map_zoom
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Article> $articles
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Place> $places
  */
@@ -36,6 +39,9 @@ class City extends Model
         'is_published',
         'published_at',
         'sort_order',
+        'map_lat',
+        'map_lng',
+        'map_zoom',
     ];
 
     /**
@@ -52,6 +58,8 @@ class City extends Model
             'seo_description' => 'array',
             'is_published' => 'boolean',
             'published_at' => 'datetime',
+            'map_lat' => 'float',
+            'map_lng' => 'float',
         ];
     }
 

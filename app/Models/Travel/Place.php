@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property array|null $description
  * @property string|null $address
  * @property string|null $google_maps_url
+ * @property float|null $lat
+ * @property float|null $lng
  * @property array|null $price_note
  * @property array|null $working_hours
  * @property int $sort_order
@@ -44,6 +46,8 @@ class Place extends Model
         'description',
         'address',
         'google_maps_url',
+        'lat',
+        'lng',
         'price_note',
         'working_hours',
         'sort_order',
@@ -59,6 +63,8 @@ class Place extends Model
             'name' => 'array',
             'slug' => 'array',
             'description' => 'array',
+            'lat' => 'float',
+            'lng' => 'float',
             'price_note' => 'array',
             'working_hours' => 'array',
             'fact_checked_at' => 'date',

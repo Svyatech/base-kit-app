@@ -22,12 +22,14 @@ Postgres 17. Ядро Laravel (users, cache, jobs, sessions) — `database/migra
 
 ### cities — города-хабы
 name, name_local, slug (unique), excerpt, content (markdown), seo_title/seo_description, is_published, published_at, sort_order.
+Карта: map_lat/map_lng (decimal 10,7, nullable) — центр карты города, map_zoom (tinyint) — зум по умолчанию (12–13).
 Связи: hasMany articles, places.
 
 ### places — места (пляжи, рынки, достопримечательности...)
 city_id (FK cascade), **parent_id** (nullable, FK places cascade) — иерархия adjacency list: Винперл → аквапарк. Верхний уровень = parent_id IS NULL. city_id у детей заполнен всегда (наследуется от родителя — контролирует репозиторий, не денормализовать руками).
 type (beach/market/attraction/food/coworking), name, slug, description, address, google_maps_url, price_note (текстом), working_hours, sort_order (ручная сортировка по значимости), fact_checked_at.
-Индексы: unique(city_id, slug), (city_id, type), (parent_id, sort_order).
+Карта: lat/lng (decimal 10,7, nullable) — координаты для карты на хабе города (Яндекс JS API, фильтры по type) и для deep links в Google Maps.
+Индексы: unique(city_id, slug), (city_id, type), (parent_id, sort_order), (lat, lng).
 Связи: city, parent, children (orderBy sort_order), articles (pivot), **guideArticle** (hasOne), media (morphMany).
 
 ### articles — статьи
