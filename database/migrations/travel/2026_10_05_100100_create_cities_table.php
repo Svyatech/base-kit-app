@@ -20,6 +20,9 @@ return new class extends Migration
             $table->boolean('is_published')->default(false)->comment('Опубликован ли город');
             $table->timestamp('published_at')->nullable()->comment('Дата публикации');
             $table->unsignedInteger('sort_order')->default(0)->comment('Порядок в навигации');
+            $table->decimal('map_lat', 10, 7)->nullable()->comment('Широта центра карты города');
+            $table->decimal('map_lng', 10, 7)->nullable()->comment('Долгота центра карты города');
+            $table->unsignedTinyInteger('map_zoom')->nullable()->comment('Зум карты города по умолчанию (12–13)');
             $table->timestamps();
         });
     }
